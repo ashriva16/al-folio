@@ -78,11 +78,22 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-      - name: Setup Ruby 💎
+      - name: Setup Ruby 💎 (prebuilt)
+        id: ruby_prebuilt
+        continue-on-error: true
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
+
+      - name: "Setup Ruby 💎 (fallback: compile)"
+        if: ${{ steps.ruby_prebuilt.outcome != 'success' }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+          bundler-cache: true
+          ruby-install: ruby
+
       - name: Setup Python 🐍
         uses: actions/setup-python@v5
         with:

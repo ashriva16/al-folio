@@ -30,6 +30,8 @@ on:
       - "**.liquid"
       - "**/*.md"
       - "**.yml"
+      - "!_draft/**"
+      - "!_notes/**"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
       - "!.github/workflows/deploy-image.yml"
@@ -37,6 +39,9 @@ on:
       - "!.github/workflows/lighthouse-badger.yml"
       - "!.github/workflows/prettier.yml"
       - "!lighthouse_results/**"
+
+permissions:
+  contents: read
 
 jobs:
   link-checker:
@@ -46,9 +51,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Link Checker 🔗
-        uses: lycheeverse/lychee-action@v2.1.0
+      - name: Install lychee
+        uses: taiki-e/install-action@v2
         with:
-          fail: true
-          # removed md files that include liquid tags
-          args: --user-agent 'curl/7.54' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _posts/2018-12-22-distill.md --exclude-path _posts/2023-04-24-videos.md --exclude-path _books/the_godfather.md --verbose --no-progress './**/*.md' './**/*.html'
+          tool: lychee@0.17.0
+
+      - name: Link Checker 🔗
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          lychee --version
+
+          lychee \
+            --no-progress \
+            --verbose \
+            --user-agent "curl/7.54" \
+            --timeout 20 \
+            --max-retries 6 \
+            --retry-wait-time 5 \
+            --exclude-path _draft \
+            --exclude-path _notes \
+            --exclude-path README.md \
+            --exclude-path _pages/404.md \
+            --exclude-path _pages/blog.md \
+            --exclude-path _posts/2018-12-22-distill.md \
+            --exclude-path _posts/2023-04-24-videos.md \
+            --exclude-path _books/the_godfather.md \
+            "./**/*.md" "./**/*.html"
