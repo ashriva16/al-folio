@@ -67,6 +67,7 @@ jobs:
             --timeout 20
             --max-retries 6
             --retry-wait-time 5
+            --exclude-path _pages/blog.md
             --exclude-path _draft
             --exclude-path _notes
             --exclude-path _projects
