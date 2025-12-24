@@ -133,3 +133,8 @@ jobs:
           repository-name: ashriva16/ashriva16.github.io
           branch: gh-pages
           folder: _site
+          clean-exclude: |
+            .github
+            README.md
+            CNAME
+            .nojekyll
