@@ -100,4 +100,4 @@ By applying these criteria before deploying downstream machine-learning models, 
 ## Further Read
 
 - 📂 [GitHub Repository](https://github.com/ashriva16/latent-space-evolution)
-- 📄 [Complete Article](https://www.sciencedirect.com/science/article/pii/S1359645423008431#sec4)
+- 📄 [Complete Article](https://doi.org/10.1016/j.actamat.2023.119514)

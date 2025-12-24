@@ -115,4 +115,4 @@ Through this process, we identified deposition conditions that consistently prod
 ## Further read
 
 - 📂 [GitHub Repository](https://github.com/ashriva16/bayesian-optimization-sputter-deposition)
-- 📄 [Complete Article](https://pubs.aip.org/avs/jva/article-abstract/42/3/033408/3284684/Bayesian-optimization-for-stable-properties-amid?redirectedFrom=fulltext)
+- 📄 [Complete Article](https://doi.org/10.1116/6.0003418)

@@ -144,4 +144,4 @@ Together, these results demonstrate that the Galerkin-based MoM provides a fast 
 
 ## Further read
 
-- 📄 [Complete Article](https://ieeexplore.ieee.org/abstract/document/9800509)
+- 📄 [Complete Article](https://digital-library.theiet.org/doi/10.1049/icp.2022.0484)

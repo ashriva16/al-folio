@@ -8,7 +8,7 @@ module.exports = {
         "./_posts/**/*.{md,html,liquid}",
         "./_pages/**/*.{md,html,liquid}",
         "./_projects/**/*.{md,html,liquid}",
-        "./_site/**/*.html"
+        "./_site/**/*.html",
       ],
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
       safelist: [
