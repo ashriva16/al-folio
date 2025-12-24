@@ -57,25 +57,17 @@ jobs:
           tool: lychee@0.17.0
 
       - name: Link Checker 🔗
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          lychee --version
-
-          lychee \
-            --no-progress \
-            --verbose \
-            --user-agent "curl/7.54" \
-            --timeout 20 \
-            --max-retries 6 \
-            --retry-wait-time 5 \
-            --exclude-path _draft \
-            --exclude-path _notes \
+        uses: lycheeverse/lychee-action@v2.1.0
+        with:
+          fail: true
+          args: >
+            --no-progress
+            --verbose
+            --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
+            --timeout 20
+            --max-retries 6
+            --retry-wait-time 5
+            --exclude-path _draft
+            --exclude-path _notes
             --exclude-path _projects
-            --exclude-path README.md \
-            --exclude-path _pages/404.md \
-            --exclude-path _pages/blog.md \
-            --exclude-path _posts/2018-12-22-distill.md \
-            --exclude-path _posts/2023-04-24-videos.md \
-            --exclude-path _books/the_godfather.md \
-            "./**/*.md" "./**/*.html"
+            -- "./**/*.md" "./**/*.html"
