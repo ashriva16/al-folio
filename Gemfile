@@ -25,6 +25,10 @@ group :jekyll_plugins do
     gem 'classifier-reborn'  # used for content categorization during the build
 end
 
+group :development do
+  gem "html-proofer", "~> 5.0"
+end
+
 # Gems for development or external data fetching (outside :jekyll_plugins)
 group :other_plugins do
     gem 'css_parser'
@@ -32,7 +36,7 @@ group :other_plugins do
     gem 'httparty'
     gem 'observer'       # used by jekyll-scholar
     gem 'ostruct'        # used by jekyll-twitter-plugin
-    # gem 'terser'         # used by jekyll-terser
+    gem 'terser'         # used by jekyll-terser
     # gem 'unicode_utils' -- should be already installed by jekyll
     # gem 'webrick' -- should be already installed by jekyll
 end

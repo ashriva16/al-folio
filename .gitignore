@@ -3,12 +3,32 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-.DS_store
+.DS_Store
 .ruby-version
 .tweet-cache
-Gemfile.lock
+
 assets/libs/
 node_modules/
 vendor
 .idea
 .venv
+
+# Local Netlify folder
+.netlify
+.stats/*
+mcp/*
+bin/*
+
+# Local / private
+.env
+.gitconfig
+
+# Build / tooling noise
+.htmlproofer.yml
+.markdownlint.json
+css-stats.mjs
+
+# Notes / drafts
+_notes/
+_draft/
+EOF

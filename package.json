@@ -1,6 +1,40 @@
 {
+  "name": "ai-folio-site",
+  "private": true,
   "devDependencies": {
-    "@shopify/prettier-plugin-liquid": "1.4.0",
-    "prettier": "3.1.1"
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "@shopify/prettier-plugin-liquid": "^1.4.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.9",
+    "gzip-size-cli": "^5.1.0",
+    "html-minifier-terser": "^7.2.0",
+    "http-server": "^14.1.1",
+    "lychee": "^0.1.8",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.7.4",
+    "purgecss": "^6.0.0"
+  },
+  "scripts": {
+    "//": "——— Build ———",
+    "install": "docker compose run --rm -v bundle:/usr/local/bundle -e BUNDLE_WITHOUT='development:test' jekyll bundle install && npm ci",
+    "prebuild": "docker compose down --remove-orphans || true",
+    "bundle:clean": "docker compose run --rm jekyll bash -lc bundle exec jekyll clean",
+    "build:jekyll": "docker compose run --rm -v bundle:/usr/local/bundle -e BUNDLE_WITHOUT='development:test' jekyll bundle exec jekyll build",
+    "stats:css:before": "node css-stats.mjs save-before",
+    "stats:css:after": "node css-stats.mjs save-after",
+    "stats:css:report": "node css-stats.mjs report",
+    "build:purge": "npm run stats:css:before && node ./node_modules/purgecss/bin/purgecss.js --config purgecss.config.js && npm run stats:css:after && npm run stats:css:report",
+    "build": "npm run prebuild && npm run build:jekyll && npm run build:purge",
+    "//__": "——— CI ———",
+    "ci:htmlproofer": "docker compose run --rm -v bundle:/usr/local/bundle jekyll bash -lc \"bundle config unset without || true; bundle install && bundle exec htmlproofer ./_site || echo 'htmlproofer failed'\"",
+    "ci": "npm run ci:htmlproofer",
+    "//___": "——— Analyze ———",
+    "analyze:html": "find _site -name '*.html' -exec sh -c 'echo {} && ls -lh {} | awk \"{print \\$5}\" && npx gzip-size-cli < {}' \\;",
+    "analyze:css": "find _site/assets/css -type f -name \"*.css\" ! -name \"*.map\" -exec sh -c 'echo {} && ls -lh {} | awk \"{print \\$5}\" && npx gzip-size-cli < {}' \\;",
+    "analyze:js": "find _site/assets/js -maxdepth 1 -type f -name \"*.js\" ! -name \"*.map\" -exec sh -c 'echo {} && ls -lh {} | awk \"{print \\$5}\" && npx gzip-size-cli < {}' \\;",
+    "analyze:assets": "npm run analyze:css && npm run analyze:js",
+    "analyze:all": "npm run analyze:html && npm run analyze:assets",
+    "analyze": "npm run analyze:all"
   }
 }
