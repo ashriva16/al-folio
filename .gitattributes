@@ -1,2 +1,6 @@
-# Force LF line endings, needed for Docker to work on Windows
+# Force LF line endings (needed for Docker / CI)
 *.sh text eol=lf
+
+# Keep myweb-owned files during rebase/merge
+README.md merge=ours
+.github/workflows/** merge=ours
