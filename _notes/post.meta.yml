@@ -1,0 +1,35 @@
+layout: distill
+last_modified_at: "2025-08-19"
+thumbnail: /assets/img/blog/800x400.png
+toc:
+  sidebar: left
+  beginning: false
+featured: true
+disqus_comments: true
+giscus_comments: true
+related_posts: true
+related_publications: true
+tikzjax: true
+chart:
+  plotly: true
+  chartjs: true
+  echarts: true
+  vega_lite: true
+images:
+  compare: true
+  lightbox2: false
+  photoswipe: false
+  slider: true
+  spotlight: false
+  venobox: false
+mermaid:
+  enabled: true
+  zoomable: true
+pretty_table: true
+map: true
+pseudocode: true
+tabs: true
+math: true
+code_diff: false
+citation: true
+typograms: false

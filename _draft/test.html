@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Background Test</title>
+    <style>
+      :root {
+        --bg-light: #ffffff;
+        --bg-dark: #0b0b0c;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+      }
+      .hero {
+        position: relative;
+        min-height: 70vh;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0) 60%) var(--bg-light);
+        color: #111;
+      }
+      html[data-theme="dark"] .hero {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 60%) var(--bg-dark);
+        color: #f5f5f5;
+      }
+      #net {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      h1 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-weight: 600;
+      }
+      .controls {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 2;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 8px 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(6px);
+      }
+      html[data-theme="dark"] .controls {
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .controls button {
+        margin-left: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <canvas id="net"></canvas>
+      <h1>Procedural Network Background</h1>
+    </div>
+
+    <div class="controls">
+      theme:
+      <button id="lightBtn">light</button>
+      <button id="darkBtn">dark</button>
+    </div>
+
+    <script>
+      (function () {
+        const mqLg = matchMedia("(min-width: 992px)");
+        const canvas = document.getElementById("net");
+        const ctx = canvas.getContext("2d");
+
+        // ----- tweakable settings -----
+        const SETTINGS = {
+          density: 0.0018, // points per px^2 (try 0.0015 - 0.0025)
+          linkDist: 110, // max distance to draw a connection (px)
+          dotMin: 0.6, // dot radius (px)
+          dotMax: 2.0,
+          lineAlpha: 0.18, // line opacity
+          dotAlpha: 0.7, // dot opacity
+        };
+
+        function palette() {
+          const dark = document.documentElement.getAttribute("data-theme") === "dark";
+          return dark
+            ? {
+                dot: "rgba(170, 240, 230, 1.0)", // aqua-ish dots
+                line: "rgba(170, 240, 230, 1.0)", // same hue; we scale alpha per distance
+              }
+            : {
+                dot: "rgba(40, 160, 150, 1.0)",
+                line: "rgba(40, 160, 150, 1.0)",
+              };
+        }
+
+        let pts = [],
+          width = 0,
+          height = 0,
+          dpr = Math.max(1, window.devicePixelRatio || 1);
+
+        function resize() {
+          const hero = canvas.parentElement;
+          width = Math.ceil(hero.clientWidth);
+          height = Math.ceil(hero.clientHeight);
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = width + "px";
+          canvas.style.height = height + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          // point count scales with area
+          const target = Math.floor(width * height * SETTINGS.density);
+          pts = [];
+          for (let i = 0; i < target; i++) {
+            pts.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              r: SETTINGS.dotMin + Math.random() * (SETTINGS.dotMax - SETTINGS.dotMin),
+            });
+          }
+          draw();
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+          const { dot, line } = palette();
+
+          // draw connections
+          ctx.lineWidth = 1;
+          for (let i = 0; i < pts.length; i++) {
+            for (let j = i + 1; j < pts.length; j++) {
+              const dx = pts[i].x - pts[j].x;
+              const dy = pts[i].y - pts[j].y;
+              const dist = Math.hypot(dx, dy);
+              if (dist <= SETTINGS.linkDist) {
+                const a = SETTINGS.lineAlpha * (1 - dist / SETTINGS.linkDist);
+                ctx.strokeStyle = line.replace("1.0", a.toFixed(3));
+                ctx.beginPath();
+                ctx.moveTo(pts[i].x, pts[i].y);
+                ctx.lineTo(pts[j].x, pts[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+
+          // draw dots last so they sit on top
+          for (const p of pts) {
+            ctx.fillStyle = dot.replace("1.0", SETTINGS.dotAlpha.toString());
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // only render on large screens
+        function mount() {
+          if (mqLg.matches) {
+            canvas.style.display = "block";
+            resize();
+          } else {
+            canvas.style.display = "none";
+          }
+        }
+
+        // listeners
+        let t;
+        window.addEventListener("resize", () => {
+          clearTimeout(t);
+          t = setTimeout(mount, 120);
+        });
+        mqLg.addEventListener ? mqLg.addEventListener("change", mount) : mqLg.addListener(mount);
+
+        // simple theme toggle for testing
+        document.getElementById("lightBtn").onclick = () => {
+          document.documentElement.setAttribute("data-theme", "light");
+          draw();
+        };
+        document.getElementById("darkBtn").onclick = () => {
+          document.documentElement.setAttribute("data-theme", "dark");
+          draw();
+        };
+
+        // respect reduced motion by freezing the layout (we’re static anyway)
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          // no animation added; static render is fine
+        }
+
+        mount();
+      })();
+    </script>
+  </body>
+</html>

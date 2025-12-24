@@ -1,0 +1,111 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Ankit Shrivastava
+    - name: Location
+      value: Knoxville, TN, USA
+    # - name: Email
+    # value: ashriva16@gmail.com
+    # - name: Phone
+    # value: (412) 628-6074
+    - name: Languages
+      value: English, Hindi
+
+- title: Education
+  type: time_table
+  contents:
+    - title: PhD in Computational Mechanics
+      institution: Carnegie Mellon University, Pittsburgh, USA
+      year: 2017–2021
+      description:
+        - "<b>Thesis</b>: Elucidating the origin of heterogeneous stresses in granular and microstructured materials using data science methods."
+        - "<b>Advisors</b>: Prof. Kaushik Dayal, Prof. Hae Young Noh"
+    - title: MS in Machine Learning
+      institution: Carnegie Mellon University, Pittsburgh, USA
+      year: 2019–2021
+    - title: MS in Computational Science
+      institution: Indian Institute of Science, Bangalore, India
+      year: 2015–2017
+      description:
+        - "<b>Thesis</b>: Numerical study of magneto-hydrodynamics for turbulent flow using the projection-based variational multiscale finite element method."
+        - "<b>Advisors</b>: Prof. Sashikumaar Ganesan"
+    - title: BS in Civil Engineering
+      institution: Indian Institute of Technology, Kharagpur, India
+      year: 2009–2013
+      description:
+        - "<b>Thesis</b>: Numerical computation of flow in open channel cross sections."
+        - "<b>Advisors</b>: Prof. Anirban Dhar"
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Postdoctoral Fellow
+      institution: Oak Ridge National Laboratory, Oak Ridge, TN, USA
+      year: 2024–Present
+      description:
+        - Developing an active learning microservice for efficient experimental design.
+        - Designing a machine learning-based control system for blackout avoidance in power grids.
+    - title: Postdoctoral Fellow
+      institution: Sandia National Laboratories, Livermore, CA, USA
+      year: 2022–2024
+      description:
+        - Developed multimodal ML models and Bayesian optimization for material and mechanical systems.
+    - title: Structural Engineer
+      institution: Thornton Tomasetti, Mumbai, India
+      year: 2014–2015
+      description:
+        - Performed structural design and analysis for high-rise buildings.
+    - title: Senior Analyst
+      institution: Eastbrook Landholdings, Bhubaneswar, India
+      year: 2013–2014
+      description:
+        - Led planning and management of civil engineering projects.
+
+- title: Open Source Projects
+  type: time_table
+  contents:
+    - title: <a href="https://github.com/ashriva16">Research Code Repositories</a>
+      year: 2018–now
+      description: Contributions to machine learning pipelines, physics-informed modeling, and high-performance simulation tools.
+
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 2024
+      items:
+        - NSF Travel Award, The Industrialization of SciML
+    - year: 2023
+      items:
+        - Travel Award, US National Congress on Computational Mechanics
+        - Travel Award, Mechanistic Machine Learning Conference
+    - year: 2017
+      items:
+        - Dean’s Fellowship, CMU
+    - year: 2015
+      items:
+        - MHRD Scholarship, Govt. of India
+    - year: 2012
+      items:
+        - IBM Centennial Research Fellowship, IIT Kharagpur
+
+- title: Academic Interests
+  type: nested_list
+  contents:
+    - title: Machine Learning for Scientific Applications
+      items:
+        - Physics-informed neural networks
+        - Multimodal learning and inverse design
+    - title: Computational Modeling
+      items:
+        - Variational multiscale finite element methods
+        - Fluid dynamics and magneto-hydrodynamics
+    - title: Uncertainty Quantification
+      items:
+        - Bayesian inference and optimization
+        - Surrogate modeling in engineering systems
+
+- title: Other Interests
+  type: list
+  contents:
+    - <u>Hobbies:</u> Hiking, creative writing, tech tinkering, science outreach

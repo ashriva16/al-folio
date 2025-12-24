@@ -1,0 +1,25 @@
+# Metadata settings
+title: "no title" # Title of the document
+
+# Pandoc-cross ref settings
+figPrefix: "Fig. " # Prefix for figures
+tblPrefix: "Table " # Prefix for tables
+eqnPrefix: "Eq. " # Prefix for equations
+secPrefix: "Section " # Prefix for sections
+autoEqnLabels: true
+lof: true # Include list of figures
+lot: true # Include list of tables
+toc-title: "Content"
+
+# Bibliography and citation
+# reference-section-title: "References" # Only works with citeproc
+nocite: "@*" # Include all references in the bibliography
+link-citations: true
+linkReferences: true
+figure-caption-position: above
+numberSections: true # <-- crossref handles missing levels as 1.* instead of 0.*
+chapters: false # ensure no chapter prefixes like 0.x
+
+# Custom LaTeX includes
+include-after: # Add custom LaTeX code to the footer
+  - "<footer>© Ankit Shrivatava, ashriva.in </footer>"

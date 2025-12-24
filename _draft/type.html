@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Letter Fade-in Effect</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #121212;
+        color: #e0e0e0;
+        font-family: monospace;
+        font-size: 2rem;
+      }
+
+      /* Initially hide the main text element to prevent flicker */
+      #fade-text {
+        visibility: hidden;
+      }
+
+      /* Style for each individual letter span */
+      #fade-text span {
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
+      }
+
+      /* The animation keyframes */
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="fade-text">This text fades in letter by letter.</h1>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const textElement = document.getElementById("fade-text");
+        const text = textElement.textContent;
+        textElement.textContent = ""; // Clear the original text
+
+        const delay = 50; // Delay in milliseconds between each letter
+
+        // Loop through each character to create a span and apply a staggered animation delay
+        for (let i = 0; i < text.length; i++) {
+          const letter = text[i];
+          const span = document.createElement("span");
+
+          // Preserve spaces by using a non-breaking space
+          if (letter === " ") {
+            span.innerHTML = "&nbsp;";
+          } else {
+            span.textContent = letter;
+          }
+
+          // Apply the staggered delay
+          span.style.animationDelay = `${i * delay}ms`;
+
+          // Append the new span to the element
+          textElement.appendChild(span);
+        }
+
+        // Make the parent element visible after it's ready
+        textElement.style.visibility = "visible";
+      });
+    </script>
+  </body>
+</html>

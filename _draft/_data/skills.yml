@@ -1,0 +1,54 @@
+tools:
+  - category: Machine Learning Libraries
+    items:
+      - name: PyTorch
+        level: 3
+      - name: TensorFlow
+        level: 3
+      - name: BoTorch
+        level: 4
+      - name: R
+        level: 3
+
+  - category: Software Development
+    items:
+      - name: Python
+        level: 4
+      - name: C
+        level: 3
+      - name: C++
+        level: 3
+
+  - category: High Performance Computing
+    items:
+      - name: CUDA
+        level: 2
+      - name: OpenMP
+        level: 2
+      - name: MPI
+        level: 2
+
+  - category: Simulation & Modeling Tools
+    items:
+      - name: FEniCS
+        level: 3
+      - name: LAMMPS
+        level: 2
+
+models:
+  - category: Neural Networks
+    items:
+      - Convolutional Neural Networks (CNNs)
+      - Autoencoders
+      - Physics-Informed Neural Networks (PINNs)
+      - Manifold Learning
+
+  - category: Optimization & Learning
+    items:
+      - Bayesian Optimization
+      - Evolutionary Optimization
+
+  - category: Data Processing
+    items:
+      - PCA (Principal Component Analysis)
+      - Saliency Mapping Algorithms

@@ -1,0 +1,131 @@
+---
+layout: default
+---
+{% assign level_labels = 'Beginner,Intermediate,Proficient,Advanced,Expert' | split: ',' %}
+{% assign level_colors = '#d9534f,#f0ad4e,#5bc0de,#0275d8,#5cb85c' | split: ',' %}
+
+<section class="tools-section">
+  <h2>Tools</h2>
+  <div class="skills-grid">
+    {% for group in site.data.skills.tools %}
+      {% if group.items and group.items.size > 0 %}
+        <div class="card mt-3 p-3">
+          <h3 class="card-title font-weight-bold">{{ group.category }}</h3>
+          <ul class="skill-list">
+            {% for item in group.items %}
+              {% assign index = item.level | minus: 1 %}
+              <li class="skill-item">
+                <div class="skill-name">{{ item.name }}</div>
+                <div class="progress-bar-container">
+                  <div
+                    class="progress-bar"
+                    style="width: {{ item.level | times: 20 }}%; background-color: {{ level_colors[index] }};"
+                  >
+                    <span class="progress-label">{{ level_labels[index] }}</span>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="models-section">
+  <h2 class="section-heading">Models & Algorithms</h2>
+  <div class="skills-grid">
+    {% for model in site.data.skills.models %}
+      {% if model.items and model.items.size > 0 %}
+        <div class="card mt-3 p-3">
+          <h3 class="card-title font-weight-bold">{{ model.category }}</h3>
+          <ul class="sub-skill-list" style="list-style: disc; padding-left: 1.25rem;">
+            {% for item in model.items %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<svg id="bubbleChart" viewBox="0 0 1000 1000">
+  <circle cx="500" cy="500" r="80" fill="#81C784" class="bb" style="animation-delay: 0s"/>
+  <text x="500" y="500" fill="white" style="animation-delay: 0s" font-size="16">Skills</text>
+</svg>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const colorPalette = ["#E57373", "#64B5F6", "#FFD54F", "#BA68C8", "#4DB6AC", "#FF8A65"];
+
+      const skillsData = [
+        {% for group in site.data.skills.tools %}
+          {
+            category: "{{ group.category }}",
+            items: [{% for item in group.items %}"{{ item.name }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+          }{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      ];
+
+      const svg = document.getElementById('bubbleChart');
+      const centerX = 500, centerY = 500, radius = 300;
+
+      skillsData.forEach((group, i) => {
+        const angle = (i / skillsData.length) * 2 * Math.PI;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        const groupRadius = 80;
+        const groupColor = colorPalette[i % colorPalette.length];
+
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", x);
+        circle.setAttribute("cy", y);
+        circle.setAttribute("r", groupRadius);
+        circle.setAttribute("fill", groupColor);
+        circle.setAttribute("class", "bb");
+        circle.setAttribute("style", `animation-delay: ${0.2 * (i + 1)}s`);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", x);
+        text.setAttribute("y", y);
+        text.setAttribute("fill", "white");
+        text.setAttribute("font-size", "12");
+        text.setAttribute("style", `animation-delay: ${0.2 * (i + 1)}s`);
+        text.textContent = group.category;
+
+        svg.appendChild(circle);
+        svg.appendChild(text);
+
+        const subRadius = 120;
+        group.items.forEach((item, j) => {
+          const subAngle = (j / group.items.length) * 2 * Math.PI;
+          const subX = x + subRadius * Math.cos(subAngle);
+          const subY = y + subRadius * Math.sin(subAngle);
+
+          const itemColor = colorPalette[(i + j + 1) % colorPalette.length];
+
+          const itemCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          itemCircle.setAttribute("cx", subX);
+          itemCircle.setAttribute("cy", subY);
+          itemCircle.setAttribute("r", "30");
+          itemCircle.setAttribute("fill", itemColor);
+          itemCircle.setAttribute("class", "bb");
+          itemCircle.setAttribute("style", `animation-delay: ${0.3 * (j + 1)}s`);
+
+          const itemText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+          itemText.setAttribute("x", subX);
+          itemText.setAttribute("y", subY);
+          itemText.setAttribute("fill", "white");
+          itemText.setAttribute("font-size", "10");
+          itemText.setAttribute("style", `animation-delay: ${0.3 * (j + 1)}s`);
+          itemText.textContent = item;
+
+          svg.appendChild(itemCircle);
+          svg.appendChild(itemText);
+        });
+      });
+    });
+</script>

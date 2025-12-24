@@ -1,0 +1,92 @@
+# =========================
+# Pandoc → HTML defaults
+# =========================
+
+# ---- I/O ----
+# from: markdown               # enable/disable via +ext/-ext (e.g., markdown+emoji)
+from: "markdown+smart+emoji+header_attributes+fenced_divs+bracketed_spans+link_attributes+implicit_figures+pipe_tables+grid_tables+multiline_tables+table_captions+definition_lists+footnotes+inline_notes+task_lists+strikeout+subscript+superscript+mark+tex_math_dollars+tex_math_single_backslash+tex_math_double_backslash+latex_macros+raw_html+yaml_metadata_block"
+to: html5 # alias: html
+# template: # use Pandoc’s default template when null
+# data-dir: /path/to/your/pandoc-data
+
+# ---- Reader/writer behavior ----
+file-scope: false # disambiguate IDs across multiple inputs
+sandbox: false # restrict IO in readers/writers
+wrap: auto # none, preserve
+columns: 72
+eol: native # lf, crlf
+dpi: 96
+
+# ---- Document structure & navigation ----
+toc: false
+toc-depth: 3
+section-divs: true
+number-sections: true
+number-offset: [] # e.g., [1,0,0]
+top-level-division: default # section, chapter, part
+
+# ---- Headings ----
+shift-heading-level-by: -1
+
+# ---- HTML-specific ----
+html-q-tags: false # true => <q> for inline quotes
+ascii: false # ASCII-only with entities
+email-obfuscation: none # javascript, references
+identifier-prefix: "" # --id-prefix
+
+# ---- Links & references ----
+reference-links: false
+reference-location: document # section, block
+figure-caption-position: below # above
+table-caption-position: above # below
+
+# # ---- Resources (embedding/linking) ----
+self-contained: false # inline images/CSS/JS/fonts
+embed-resources: false # inline external resources
+link-images: true # false => don’t autolink images
+no-check-certificate: false
+
+# # ---- Math in HTML ----
+html-math-method:
+  method: mathjax # mathjax, katex, mathml, webtex, gladtex
+
+# template:                  # null => default template
+# css: # e.g., ["styles.css", "print.css"]
+
+# # Citations
+csl: ${.}/../utils/nature.csl
+
+# # ---- Metadata ----
+# metadata: {}                 # inline key/values (title, author, etc.)
+metadata-files: # e.g., ["metadata.yaml"]
+  - ${.}/metadata.yaml
+
+# # ---- Variables for templates ----
+variables: {} # arbitrary template variables
+
+# # ---- Filters & Lua ----
+filters:
+  - ${.}/../utils/filter_yaml.py
+  - pandoc-crossref
+  - citeproc
+  - ${.}/../utils/color_text.lua
+  - ${.}/../utils/theorems.lua
+  - ${.}/../utils/refs-frame.lua
+  - ${.}/../utils/latex2html.lua
+
+# ---- Media & paths ----
+resource-path: [] # search paths for images/includes
+# extract-media:             # dir to extract embedded media
+# default-image-extension:  # e.g., "png"
+
+# ---- Code & highlighting ----
+highlight-style: kate # pygments, kate, tango, zenburn, etc.
+syntax-definition: [] # custom syntax defs
+indented-code-classes: [] # classes for indented code blocks
+listings: false # (LaTeX only)
+
+
+# ---- Chunked HTML ----
+# split-level: 5            # 1–6, split at heading level
+# chunk-template:
+

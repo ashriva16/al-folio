@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <!-- Head -->
+  <head>
+    {% if page.redirect %}
+      {% if page.redirect == true %}
+        {% assign redirect = site.baseurl | append: '/' %}
+      {% elsif page.redirect contains '://' %}
+        {% assign redirect = page.redirect %}
+      {% else %}
+        {% assign redirect = page.redirect | relative_url %}
+      {% endif %}
+      <meta http-equiv="refresh" content="3; url={{ redirect }}">
+    {% endif %}
+    {% include head.liquid %}
+  </head>
+  <!-- Body -->
+  <body class="{% if page.navbar_fixed != false and site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+    <!-- Header -->
+    <link rel="preload" as="image" href="/assets/img/background.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/assets/img/background-dark.webp" type="image/webp" fetchpriority="high">
+    {% if page.carousel %}
+      {% assign first_image = page.carousel[0].url %}
+      <link rel="preload" as="image" href="{{ first_image | relative_url }}" type="image/webp" fetchpriority="high">
+    {% endif %}
+
+    {% include header.liquid %}
+
+    <section class="hero-banner">
+      <!-- Carousel (Full Width) -->
+      {% if page.carousel %}
+        <div id="homecarousel" class="carousel slide d-none d-lg-block" data-ride="carousel">
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              {% include intro.liquid %}
+            </div>
+            {% for image in page.carousel %}
+              <div class="carousel-item">
+                <div class="container">
+                  {% assign img_src = image.url %}
+                  {% assign img_alt = image.alt | default: 'Slide' %}
+                  {%
+                    include figure.liquid
+                    loading=forloop.first
+                    path=img_src
+                    class="d-block w-100 carousel-img"
+                    alt=img_alt
+                    cache_bust=true
+                  %}
+                  <div class="carousel-caption d-block">
+                    <h3>
+                      {% if image.caption %}
+                        <span style="color: white;">{{ image.caption }}</span>
+                      {% endif %}
+                      {% if image.link %}
+                        <a
+                          href="{{ image.link }}"
+                          style="font-weight: bold;"
+                          aria-label="Learn more about {{ image.caption | default: 'this project' }}"
+                        >
+                          Learn More →
+                        </a>
+                      {% endif %}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#homecarousel" data-slide-to="0" class="active"></li>
+            {% for image in page.carousel %}
+              <li data-target="#homecarousel" data-slide-to="{{ forloop.index }}"></li>
+            {% endfor %}
+          </ol>
+
+          <!-- Controls -->
+          <a class="carousel-control-prev" href="#homecarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#homecarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <div class="d-block d-lg-none">
+          {% include intro.liquid %}
+        </div>
+      {% else %}
+        {% include intro.liquid %}
+      {% endif %}
+    </section>
+    <!-- End Carousel -->
+    <br>
+    <!-- Content -->
+    <div class="post">
+      <div class="container">
+        <article>
+          <!-- News -->
+          {% if page.announcements and page.announcements.enabled %}
+            <h2 style="text-align: center; font-weight: bold;">
+              <a href="{{ '/news/' | relative_url }}" style="color: inherit">Recent News</a>
+            </h2>
+            {% include news.liquid limit=true %}
+          {% endif %}
+
+          <!-- Latest posts -->
+          {% if page.latest_posts and page.latest_posts.enabled %}
+            <h2 style="text-align: center; font-weight: bold;">
+              <a href="{{ '/blog/' | relative_url }}" style="color: inherit">Latest Posts</a>
+            </h2>
+            {% include latest_posts.liquid %}
+          {% endif %}
+
+          <!-- Selected papers -->
+          {% if page.selected_papers %}
+            <h2 style="text-align: center; font-weight: bold;">
+              <a href="{{ '/publications/' | relative_url }}" style="color: inherit">Selected Publications</a>
+            </h2>
+            {% include selected_papers.liquid %}
+          {% endif %}
+
+          <!-- Social -->
+          {% if page.social %}
+            <div class="social">
+              <div class="contact-icons">{% include social.liquid %}</div>
+
+              <div class="contact-note">{{ site.contact_note }}</div>
+            </div>
+          {% endif %}
+
+          {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
+            {% include newsletter.liquid center=true %}
+          {% endif %}
+        </article>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    {% include footer.liquid %}
+
+    <!-- JavaScripts -->
+    {% include scripts.liquid %}
+  </body>
+</html>
