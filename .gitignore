@@ -23,12 +23,5 @@ bin/*
 .env
 .gitconfig
 
-# Build / tooling noise
-.htmlproofer.yml
-.markdownlint.json
-css-stats.mjs
 
-# Notes / drafts
-_notes/
-_draft/
 EOF

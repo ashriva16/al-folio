@@ -4,7 +4,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@shopify/prettier-plugin-liquid": "^1.4.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.23",
     "esbuild": "^0.25.9",
     "gzip-size-cli": "^5.1.0",
     "html-minifier-terser": "^7.2.0",
@@ -24,7 +24,7 @@
     "stats:css:before": "node css-stats.mjs save-before",
     "stats:css:after": "node css-stats.mjs save-after",
     "stats:css:report": "node css-stats.mjs report",
-    "build:purge": "npm run stats:css:before && node ./node_modules/purgecss/bin/purgecss.js --config purgecss.config.js && npm run stats:css:after && npm run stats:css:report",
+    "build:purge": "npm run stats:css:before && npx --no-install purgecss --config purgecss.config.js && npm run stats:css:after && npm run stats:css:report",
     "build": "npm run prebuild && npm run build:jekyll && npm run build:purge",
     "//__": "——— CI ———",
     "ci:htmlproofer": "docker compose run --rm -v bundle:/usr/local/bundle jekyll bash -lc \"bundle config unset without || true; bundle install && bundle exec htmlproofer ./_site || echo 'htmlproofer failed'\"",

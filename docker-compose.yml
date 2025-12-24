@@ -12,7 +12,7 @@ services:
     #     GROUPNAME: # id -gn
     #     USERID: # id -u
     #     USERNAME: # echo $USER
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "${USERID:-1000}:${GROUPID:-1000}"
     working_dir: /srv/jekyll
     ports:
       - 8080:8080
@@ -23,10 +23,12 @@ services:
     # environment:
     #   - JEKYLL_ENV=development
     environment:
-      - UID=${UID:-1000}
-      - GID=${GID:-1000}
+      - USERID=${USERID:-1000}
+      - GROUPID=${GROUPID:-1000}
+      - HOME=/srv/jekyll
       - JEKYLL_ENV=development
       - BUNDLE_PATH=/srv/jekyll/vendor/bundle
+      - BUNDLE_APP_CONFIG=/srv/jekyll/.bundle
       - GEM_HOME=/srv/jekyll/vendor/bundle
 
 volumes:
