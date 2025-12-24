@@ -71,6 +71,7 @@ jobs:
             --retry-wait-time 5 \
             --exclude-path _draft \
             --exclude-path _notes \
+            --exclude-path _projects
             --exclude-path README.md \
             --exclude-path _pages/404.md \
             --exclude-path _pages/blog.md \
