@@ -1,0 +1,58 @@
+<!-- Carousel (Full Width) -->
+{% if page.carousel %}
+  <div id="homecarousel" class="carousel slide d-none d-lg-block" data-ride="carousel">
+    <!-- Slides -->
+    <div class="carousel-inner">
+      {% for image in page.carousel %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="container">
+            {% assign img_src = image.url %}
+            {% assign img_alt = image.alt | default: 'Slide' %}
+            {%
+              include figure.liquid
+              loading=forloop.first
+              path=img_src
+              class="d-block w-100 carousel-img"
+              alt=img_alt
+              cache_bust=true
+            %}
+            <div class="carousel-caption d-block">
+              <h3>
+                {% if image.caption %}
+                  <span style="color: white;">{{ image.caption }}</span>
+                {% endif %}
+                {% if image.link %}
+                  <a
+                    href="{{ image.link }}"
+                    style="font-weight: bold;"
+                    aria-label="Learn more about {{ image.caption | default: 'this project' }}"
+                  >
+                    Learn More →
+                  </a>
+                {% endif %}
+              </h3>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#homecarousel" data-slide-to="0" class="active"></li>
+      {% for image in page.carousel %}
+        <li data-target="#homecarousel" data-slide-to="{{ forloop.index }}"></li>
+      {% endfor %}
+    </ol>
+
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#homecarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#homecarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+{% endif %}

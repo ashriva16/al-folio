@@ -4,8 +4,7 @@ name: Update TOCs
 on:
   push:
     branches:
-      - main
-      - master
+      - myweb
     paths:
       - "*.md"
   workflow_dispatch:

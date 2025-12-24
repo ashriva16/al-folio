@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html data-theme="dark">
   <head>
     {% include head.liquid %}
 
@@ -52,7 +52,7 @@
     </script>
   </d-front-matter>
 
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+  <body class="{% if page.navbar_fixed != false and site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
     <!-- Header -->
     {% include header.liquid %}
 
@@ -67,7 +67,7 @@
       {% endif %}
 
       <d-article>
-        {% if page.toc and page.toc.size > 0 %}
+        {% if page.toc %}
           <d-contents>
             <nav class="l-text figcaption">
               <h3>Contents</h3>
@@ -87,16 +87,7 @@
               {% endfor %}
             </nav>
           </d-contents>
-
-        {% elsif page.toc == true %}
-          <d-contents>
-            <nav class="l-text figcaption">
-              <h3>Contents</h3>
-              {% toc %}
-            </nav>
-          </d-contents>
         {% endif %}
-
         {{ content }}
       </d-article>
 

@@ -26,10 +26,9 @@ $(document).ready(function () {
     var navSelector = "#toc-sidebar";
     var $myNav = $(navSelector);
     Toc.init($myNav);
-    $("body").scrollspy({
-      target: navSelector,
-      offset: 100,
-    });
+    // $("body").scrollspy({
+    //   target: navSelector,
+    // });
   }
 
   // add css to jupyter notebooks

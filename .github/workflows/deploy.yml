@@ -3,10 +3,16 @@ name: Deploy site
 on:
   push:
     branches:
-      - master
-      - main
+      - myweb
     paths:
       - "assets/**"
+      - "_includes/**"
+      - "_layouts/**"
+      - "_data/**"
+      - "_pages/**"
+      - "_posts/**"
+      - "_projects/**"
+      - "_bibliography/**"
       - "_sass/**"
       - "_scripts/**"
       - "**.bib"
@@ -17,6 +23,8 @@ on:
       - "**.yml"
       - "Gemfile"
       - "Gemfile.lock"
+      - "!_draft/**"
+      - "!_notes/**"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -32,8 +40,7 @@ on:
       - "!README.md"
   pull_request:
     branches:
-      - master
-      - main
+      - myweb
     paths:
       - "assets/**"
       - "_sass/**"
@@ -94,12 +101,24 @@ jobs:
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
+      - name: Setup Node 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Install Node deps
+        run: npm ci --ignore-scripts
       - name: Purge unused CSS 🧹
-        run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+        run: npm run build:purge
+      - name: Remove source maps
+        run: find _site -type f -name "*.map" -delete
+      - name: HTMLProofer (non-blocking)
+        run: bundle exec htmlproofer ./_site || true
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          repository-name: ashriva16/ashriva16.github.io
+          branch: gh-pages
           folder: _site

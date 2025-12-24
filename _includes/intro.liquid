@@ -1,0 +1,79 @@
+<div class="container">
+  {% comment %}
+    <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span>
+          {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      <p class="desc">{{ page.subtitle }}</p>
+    </header>
+  {% endcomment %}
+  <article>
+    {% if page.profile %}
+      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
+        {% if page.profile.image %}
+          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+          {% if page.profile.image_circular %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
+          {% else %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
+          {% endif %}
+          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
+                30vw, 95vw"{% endcapture %}
+          {% include figure.liquid loading="lazy" decoding="async" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image cache_bust=true %}
+        {% endif %}
+        {% if page.profile.more_info %}
+          <div class="more-info">{{ page.profile.more_info }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <p style="color: var(--global-theme-color); text-align: left; font-size: 1.5rem; font-weight: bold;">
+      About me
+      {% if page.cv_pdf %}
+        <a
+          {% if page.cv_pdf contains '://' %}
+            href="{{ page.cv_pdf }}"
+          {% else %}
+            href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}"
+          {% endif %}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="float-right"
+        >
+          <i class="fa-solid fa-file-pdf fa-lg"></i> <span style="font-size: 1rem; font-weight: normal;">View CV</span>
+        </a>
+      {% endif %}
+    </p>
+    <div class="clearfix" style="text-align: justify;">{{ content }}</div>
+  </article>
+
+  {% comment %}
+    {% assign level_labels = 'Beginner,Intermediate,Proficient,Advanced,Expert' | split: ',' %}
+    {% assign level_colors = '#FB8C00,#8E24AA,#1E88E5,#43A047,#E53935' | split: ',' %}
+    {% assign level_classes_bs4 = 'badge-danger,badge-warning,badge-info,badge-primary,badge-success' | split: ',' %}
+
+    {% for group in site.data.skills.Expertise %}
+      {% if group.items and group.items.size > 0 %}
+        <div class="skills-container">
+          <h3>{{ group.category }}</h3>
+          <div class="d-flex flex-wrap justify-content-center">
+            {% for item in group.items %}
+              {% assign index = item.level | minus: 1 %}
+              <span class="badge skill-badge px-3 py-2 rounded-pill mr-3 mb-3 {{ level_classes_bs4[index] }}">
+                {{ item.name }}
+                <small>({{ level_labels[index] }})</small>
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endcomment %}
+  {% comment %} </div> {% endcomment %}
+</div>

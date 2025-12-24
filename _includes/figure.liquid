@@ -1,3 +1,10 @@
+{% assign load_type = include.loading %}
+{% if load_type == true %}
+  {% assign load_type = 'eager' %}
+{% elsif load_type == false or load_type == null %}
+  {% assign load_type = 'lazy' %}
+{% endif %}
+
 {% assign img_path = include.path | remove: '.jpg' | remove: '.jpeg' | remove: '.png' | remove: '.tiff' | remove: '.gif' %}
 {% assign parts = include.path | split: '.' %}
 {% assign ext = parts.last %}
@@ -62,6 +69,9 @@
           {% endif %}
         "
       {% endif %}
+      {% if include.style %}
+        style="{{ include.style }}";
+      {% endif %}
       {% if include.alt %}
         alt="{{ include.alt }}"
       {% endif %}
@@ -72,11 +82,17 @@
         data-zoomable
       {% endif %}
       {% if include.loading %}
-        loading="{{ include.loading }}"
+        loading="{{ load_type }}"
       {% elsif site.lazy_loading_images %}
         loading="lazy"
       {% endif %}
-      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+      {%- if include.fetchpriority -%}
+        fetchpriority="{{ include.fetchpriority }}"
+      {%- endif -%}
+      {%- if include.decoding -%}
+        decoding="{{ include.decoding }}"
+      {%- endif -%}
+      data-handle-error="remove-responsive-srcset"
     >
   </picture>
 

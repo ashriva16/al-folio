@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="{{ site.lang }}" data-theme="dark">
+  <!-- Head -->
+  <head>
+    {% if page.redirect %}
+      {% if page.redirect == true %}
+        {% assign redirect = site.baseurl | append: '/' %}
+      {% elsif page.redirect contains '://' %}
+        {% assign redirect = page.redirect %}
+      {% else %}
+        {% assign redirect = page.redirect | relative_url %}
+      {% endif %}
+      <meta http-equiv="refresh" content="3; url={{ redirect }}">
+    {% endif %}
+    {% include head.liquid %}
+    {% if page.carousel and page.carousel.size > 0 %}
+      {% assign hero = page.carousel[0] %}
+      {% assign parts = hero.url | split: '.' %}
+      {% assign ext = parts.last | downcase %}
+
+      {%- comment -%} Strip raster extension to build the WebP srcset, like figure.liquid {%- endcomment -%}
+      {% assign base = hero.url | remove: '.jpg' | remove: '.jpeg' | remove: '.png' | remove: '.tiff' | remove: '.gif' %}
+
+      {%- if site.imagemagick.enabled -%}
+        {% if ext == 'gif' or ext == 'jpeg' or ext == 'jpg' or ext == 'png' or ext == 'tiff' %}
+          <!-- Preload using the SAME algorithm + sizes default (95vw) -->
+          <link
+            rel="preload"
+            as="image"
+            type="image/webp"
+            imagesrcset="{% for i in site.imagemagick.widths %}{{ base | relative_url }}-{{ i }}.webp {{ i }}w{% unless forloop.last %}, {% endunless %}{% endfor %}"
+            imagesizes="95vw"
+            fetchpriority="high"
+          >
+        {% endif %}
+      {%- else -%}
+        <!-- SVG / non-raster or imagemagick disabled: preload exact URL -->
+        <link
+          rel="preload"
+          as="image"
+          href="{{ hero.url | relative_url }}"
+          imagesizes="95vw"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    {% endif %}
+  </head>
+  <!-- Body -->
+  <body class="{% if page.navbar_fixed != false and site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {{ page.slug | default: page.title | downcase | replace: ' ', '-' }}">
+    <!-- Header -->
+    {% include header.liquid %}
+
+    <div id="fullpage">
+      <section class="hero-banner bsb-hero-2 px-3" data-bg="uq">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container overflow-hidden">
+          <div class="row align-items-lg-center justify-content-lg-between">
+            <div class="col-12 col-lg-6 order-0 order-lg-first py-3 py-lg-0">
+              <h2 class="post-title">
+                {% if site.title == 'blank' %}
+                  <span class="font-weight-bold">{{ site.first_name }}</span>
+                  {{ site.middle_name }}
+                  {{ site.last_name }}, PhD
+                {% else %}
+                  {{ site.title }}
+                {% endif %}
+              </h2>
+              <br>
+              <div class="h3 mb-3 text-wrap">
+                <span id="fade-text">{{ page.subtitle }} </span>
+              </div>
+              <br>
+              {% comment %}
+                <div class="row mt-2">
+                  <!-- Experience -->
+                  <div class="col-6 col-md-3 mb-3">
+                    <h3 class="font-weight-bold text-primary">10+</h3>
+                    <span class="badge badge-primary">Years Experience</span>
+                  </div>
+
+                  <!-- Projects -->
+                  <div class="col-6 col-md-3 mb-3">
+                    <h3 class="font-weight-bold text-success">15+</h3>
+                    <span class="badge badge-success">Projects</span>
+                  </div>
+                </div>
+              {% endcomment %}
+              <div class="d-flex d-sm-flex">
+                <a
+                  href="https://www.linkedin.com/messaging/compose/?recipient=ashriva16"
+                  class="btn btn-primary bsb-btn-xl rounded-pill skill-badge mr-2"
+                >
+                  <i class="fa-brands fa-linkedin"></i> <span style="font-weight: bold;">Contact Me</span>
+                </a>
+                {% comment %}
+                  {% if page.cv_pdf %}
+                    <a
+                      href="/cv/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-secondary bsb-btn-xl rounded-pill skill-badge"
+                    >
+                      <i class="fa-solid fa-file-pdf fa-lg"></i> <span style="font-weight: bold;">View CV</span>
+                    </a>
+                  {% endif %}
+                {% endcomment %}
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 text-center">
+              {% include carousel.liquid %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" data-aos="fade-up">
+        {% include intro.liquid %}
+      </section>
+
+      <!-- News -->
+      {% if page.announcements and page.announcements.enabled %}
+        <section data-aos="fade-up">
+          <div class="container">
+            <div class="post">
+              <article>
+                <h2 style="text-align: center; font-weight: bold;">
+                  <a href="{{ '/news/' | relative_url }}">Latest News</a>
+                </h2>
+                {% include news.liquid limit=true %}
+              </article>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      <!-- Latest posts -->
+      {% if page.latest_posts and page.latest_posts.enabled %}
+        <section data-aos="fade-up">
+          <div class="container">
+            <div class="post">
+              <article>
+                <h2 style="text-align: center; font-weight: bold;">
+                  <a href="{{ '/blog/' | relative_url }}">Latest Posts</a>
+                </h2>
+                {% include latest_posts.liquid %}
+              </article>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      <!-- Selected papers -->
+      {% if page.selected_papers %}
+        <section data-aos="fade-up">
+          <div class="container">
+            <div class="post">
+              <article>
+                <h2 style="text-align: center; font-weight: bold;">
+                  <a href="{{ '/publications/' | relative_url }}">Selected Publications</a>
+                </h2>
+                {% include selected_papers.liquid %}
+              </article>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
+        <section data-aos="fade-up">
+          <div class="container">
+            <div class="post">
+              <article>
+                {% include newsletter.liquid center=true %}
+              </article>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </div>
+
+    <!-- Social -->
+    {% if page.social %}
+      <div class="container">
+        <div class="post">
+          <article>
+            <div class="social">
+              <div class="contact-icons">{% include social.liquid %}</div>
+
+              <div class="contact-note">{{ site.contact_note }}</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Footer -->
+    {% include footer.liquid %}
+
+    <!-- JavaScripts -->
+    {% include scripts.liquid %}
+  </body>
+</html>

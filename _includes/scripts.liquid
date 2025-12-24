@@ -195,7 +195,7 @@
   <script async src="https://badge.dimensions.ai/badge.js"></script>
 {% endif %}
 
-{% if site.enable_math %}
+{% if site.enable_math and page.math %}
   <!-- MathJax -->
   <script
     defer
@@ -223,6 +223,10 @@
   {% endunless %}
 {% endif %}
 
+{% if site.enable_math and page.math %}
+  <script src="{{ '/assets/pandoc_utils/mathjax-config.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}
+
 {% if site.enable_google_analytics %}
   <!-- Analytics -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -248,7 +252,7 @@
   <script async defer src="https://openpanel.dev/op1.js"></script>
 {% endif %}
 
-{% if site.enable_progressbar %}
+{% if page.navbar_fixed != false and site.enable_progressbar %}
   <!-- Scrolling Progress Bar -->
   <script defer src="{{ '/assets/js/progress-bar.js' | relative_url | bust_file_cache }}" type="text/javascript"></script>
 {% endif %}
@@ -308,9 +312,12 @@
 {% if site.back_to_top %}
   <!-- Back to Top -->
   <script src="{{ '/assets/js/vanilla-back-to-top.min.js' | relative_url | bust_file_cache }}"></script>
-  <script>
-    addBackToTop();
-  </script>
+  <script src="/assets/js/addbacktotop.js"></script>
+  {% comment %}
+    <script>
+      addBackToTop();
+    </script>
+  {% endcomment %}
 {% endif %}
 
 {% if site.search_enabled %}
@@ -325,3 +332,28 @@
 {% if site.newsletter.enabled %}
   <script defer src="{{ '/assets/js/newsletter.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
+
+{% if page.toc and page.toc.sidebar %}
+  <!-- Sidebar Table of Contents -->
+  <script defer src="{{ '/assets/js/custom/toc.js' | relative_url }}"></script>
+{% endif %}
+
+{% if page.typer %}
+  {% comment %} <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> {% endcomment %}
+  <script defer src="{{ '/assets/js/custom/typer.js' | relative_url }}"></script>
+{% endif %}
+
+{% if page.aos %}
+  <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script defer src="{{ '/assets/js/custom/aos.js' | relative_url }}"></script>
+{% endif %}
+
+{% if page.gallery %}
+  {% comment %} <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> {% endcomment %}
+  <script defer src="{{ '/assets/js/custom/gallery.js' | relative_url }}"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+{% endif %}
+
+<script src="{{ '/assets/js/default.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/custom/navbar.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/custom/hero.js' | relative_url }}"></script>

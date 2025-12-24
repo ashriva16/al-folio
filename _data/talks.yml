@@ -1,0 +1,87 @@
+- title: Guest Lectures
+  type: time_table
+  contents:
+    - title: Machine learning algorithms for Inverse design.
+      institution: Deparment of Mechanical Engineering, Indian Institute of Technology, Bombay
+      location: Mumbai, MH, India
+      year: 2024
+
+- title: Invited Talks
+  type: time_table
+  contents:
+    - title: Mulitmodal machine learning with small datasets for process strcture property modeling
+      institution: International Workshops on Advances in Computational Mechanics
+      location: Kitakyushu, Japan
+      year: 2024
+    - title: Overcoming challenges of scarce and multimodal data in material design with machine learning
+      institution: BIRDSHOT Center seminar, Texas A&M University
+      location: College Station, Texas, USA
+      year: 2024
+    - title: "Enabling Material Discovery: Harnessing Multimodal Machine Learning Algorithms for Inverse Design."
+      institution: Mathematics in Computation (MiC) seminar, Oak Ridge National Laboratory
+      location: Oak Ridge, TN, USA
+      year: 2024
+    - title: Predicting stress hotspots in polycrystalline materials from microstructural features using deep learning
+      institution: MIrACLE seminar, Air Force Research Laboratory
+      location: Ohio, USA
+      year: 2022
+    - title: Predicting stress hotspots in polycrystalline materials from microstructural features using deep learning
+      institution: Crunch seminar, Department of Applied Mathematics, Brown University
+      location: Providence, RI, USA
+      year: 2021
+    - title: Predicting stress hotspots in polycrystalline materials from microstructural features using deep learning
+      institution: Physics and Chemistry of Materials Group Seminar, Los Alamos National Laboratory
+      location: Los Alamos, NM, USA
+      year: 2021
+    - title: Predicting stress hotspots in polycrystalline materials from microstructural features using deep learning
+      institution: Computational Biosciences Group Seminar, Lawrence Berkeley National Laboratory
+      location: Berkeley, CA, USA
+      year: 2021
+
+- title: Contributed Talks
+  type: time_table
+  contents:
+    - title: Spatio-temporal super-resolution of dynamical systems using physics-informed deep-learning
+      institution: Mechanistic Machine Learning, and Digital Engineering for Computational Science, Engineering and Technology
+      year: 2023
+      location: El Paso, NM, USA
+    - title: Predicting microstructure from physical vapor deposition process conditions using machine learning.
+      institution: Mechanistic Machine Learning, and Digital Engineering for Computational Science, Engineering and Technology
+      year: 2023
+      location: El Paso, NM, USA
+    - title: Modeling process structure property relationships in Mo thin films from multi-modal data using machine learning
+      institution: U.S. National Congress on Computational Mechanics
+      year: 2023
+      location: Albuquerque, NM ,USA
+    - title: Spatio-temporal super-resolution of dynamical systems using physics-informed deep-learning
+      institution: Machine Learning/Deep Learning Workshop, Sandia National Laboratory
+      location: Livermore, CA ,USA
+      year: 2023
+    - title: Bayesian optimization-assisted sputter deposition of Molybdenum thin films
+      institution: International Conference on Metallurgical Coatings and Thin Films
+      location: San Diego, CA, USA
+      year: 2023
+    - title: Analyzing latent dimensional representations of microstructure evolution
+      institution: The Minerals, Metals, and Materials Society
+      location: San Diego, CA, USA
+      year: 2023
+    - title: Predicting microstructure from physical vapor deposition process conditions using machine learning.
+      institution: Mechanistic Machine Learning and Digital Engineering for Computational Science, Engineering and Technology
+      location: San Diego, CA, USA
+      year: 2021
+    - title: Predicting Stress Hotspots Inside Microstructures Using Deep Learning
+      institution: Materials Science & Technology conference
+      location: Pittsburgh, PA, USA
+      year: 2020
+
+- title: Poster Presentations
+  type: time_table
+  contents:
+    - title: Identifying microstructural features that drive stress hot-spots using a data mining approach
+      institution: NextManufacturing Center Virtual Membership Meeting & Research Expo
+      location: Pittsburgh, PA, USA
+      year: 2020
+    - title: Identifying microstructural features that drive stress hotspots using a data mining approach
+      institution: Engineering Mechanics Institute Conference
+      location: Los Angeles, CA, USA
+      year: 2019

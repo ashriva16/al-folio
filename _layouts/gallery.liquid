@@ -1,0 +1,131 @@
+---
+layout: default
+---
+<div class="header-bar">
+  <h2>{{ page.description }}</h2>
+</div>
+
+<!-- pages/projects.md -->
+<div class="projects">
+  {% if site.enable_project_categories and page.display_categories %}
+    <!-- Display categorized projects -->
+    {% for category in page.display_categories %}
+      <a id="{{ category }}" href=".#{{ category }}">
+        <h2 class="category">{{ category }}</h2>
+      </a>
+      {% assign categorized_projects = site.projects | where: 'category', category %}
+      {% assign sorted_projects = categorized_projects | sort: 'importance' %}
+      <!-- Generate cards for each project -->
+      {% if page.one_column %}
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-1">
+            {% for project in sorted_projects %}
+              {% include card_landscape.liquid %}
+            {% endfor %}
+          </div>
+        </div>
+      {% elsif page.two_column %}
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-2">
+            {% for project in sorted_projects %}
+              {% include card_two_cols.liquid %}
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="row row-cols-1 row-cols-md-3">
+          {% for project in sorted_projects %}
+            {% include card.liquid %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  {% else %}
+    <!-- Display projects without categories -->
+
+    <!-- Pills for desktop -->
+    {% comment %} <div class="nav-scroller mb-4 d-none d-md-block"> {% endcomment %}
+    <div class="d-none d-md-block">
+      <div class="mt-3 d-flex justify-content-center flex-wrap" role="group" id="categoryFilter">
+        <!-- Default "Show all" button -->
+        <button
+          type="button"
+          class="btn btn-primary active rounded-pill shadow-sm btn px-2"
+          data-filter="*"
+        >
+          <i class="fa-solid fa-border-all fa-sm"></i> Show all
+        </button>
+
+        <!-- Category buttons -->
+        {% for category in page.filter_categories %}
+          <button
+            type="button"
+            class="btn btn-theme rounded-pill shadow-sm btn px-2"
+            data-filter=".category-{{ category | slugify }}"
+          >
+            <i class="fa-solid fa-layer-group fa-sm"></i> {{ category }}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Dropdown for mobile -->
+    <div class="nav-dropdown d-block d-md-none mb-4">
+      <select class="custom-select" id="categoryFilterSelect">
+        <option value="*">Show all</option>
+        {% for category in page.filter_categories %}
+          <option value=".category-{{ category | slugify }}">{{ category }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    {% comment %}
+      {% assign all_tags = "" | split: "" %}
+      {% for project in site.projects %}
+        {% if project.tags %}
+          {% assign all_tags = all_tags | concat: project.tags %}
+        {% endif %}
+      {% endfor %}
+      {% assign unique_tags = all_tags | uniq | sort_natural %}
+
+
+      <div class="text-center mb-4">
+        <div class="tag-category-list">
+          <div class="row row-cols-1 row-cols-md-3 g-3 text-start">
+            {% for tag in unique_tags %}
+              {% assign tag_count = site.projects | where_exp: "item", "item.tags contains tag" | size %}
+              <div class="col">
+                <a href="#" class="tag-filter text-decoration-none me-2 text-muted" data-filter=".tag-{{ tag | slugify }}">
+                  <i class="fa-solid fa-hashtag fa-sm"></i>{{ tag }} ({{ tag_count }})
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endcomment %}
+
+    {% comment %} {% assign sorted_projects = site.projects | sort: 'importance' %} {% endcomment %}
+    {% comment %} Use paginator slice when pagination is active {% endcomment %}
+    {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+
+    <!-- Generate cards for each project -->
+    <br>
+    {% if page.horizontal %}
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-5" id="project-grid">
+          {% for project in sorted_projects %}
+            {% include card_two_cols.liquid %}
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="row row-cols-1 row-cols-md-3 g-5" id="project-grid">
+        {% for project in sorted_projects %}
+          {% include card.liquid %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

@@ -1,11 +1,13 @@
 ---
-layout: cv
+layout: none
+title: "CV"
 permalink: /cv/
-title: cv
-nav: true
-nav_order: 5
-cv_pdf: example_pdf.pdf # you can also use external links here
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
-toc:
-  sidebar: left
+nav: false
+nav_order: 6
 ---
+
+<!-- <iframe src="/pdfjs/web/viewer.html?file=/assets/pdf/workfolio.pdf" style="position:fixed; top:0; left:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe> -->
+
+<iframe
+  src="{{ '/assets/js/pdfjs/web/viewer.html' | relative_url }}?file={{ '/assets/pdf/workfolio.pdf' | relative_url | url_encode }}"
+  style="position:fixed;top:0;left:0;width:100%;height:100%;border:0;"></iframe>

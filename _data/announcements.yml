@@ -1,0 +1,51 @@
+- date: 2021-07-01
+  content: "Published in Mathematics and Mechanics of Solids: CNNs for peak stress prediction in microstructured materials"
+  inline: true
+
+- date: 2021-11-10
+  content: "Will be giving an invited talk at Brown University Crunch Seminar: Deep learning for microstructural stress prediction"
+  inline: true
+
+- date: 2022-11-15
+  content: "Will be giving an invited talk at Air Force Research Lab: Predicting stress hotspots using deep learning"
+  inline: true
+
+- date: 2023-02-01
+  content: "Published in Acta Materialia: Trade-offs in the latent representation of microstructure evolution"
+  inline: true
+
+- date: 2023-04-01
+  content: "Conference Paper Accepted at AAAI Workshop: Spatio-temporal super-resolution using physics-informed deep learning"
+  inline: true
+
+- date: 2023-08-01
+  content: "Will be presenting at USNCCM 2023: Modeling process-structure-property relationships in Mo thin films from multimodal data"
+  inline: true
+
+- date: 2023-11-20
+  content: "Paper accepted at NeurIPS Workshop on ML for Scientific Discovery: Mechanistic ML and Digital Engineering"
+  inline: true
+
+- date: 2024-03-01
+  content: "Article accepted in Journal of Applied Mechanics (2025): Force Chains in Granular Packings: The Roles of Size, Packing, and Cohesion"
+  inline: true
+
+- date: 2024-04-01
+  content: "Co-organizing Minisymposium at SIAM Mathematics of Materials: ML for insights from heterogeneous materials data"
+  inline: true
+
+- date: 2024-06-15
+  content: "Will be giving an invited talk at Oak Ridge National Laboratory – MiC Seminar: Enabling Material Discovery: Harnessing Multimodal Machine Learning Algorithms for Inverse Design"
+  inline: true
+
+- date: 2024-04-08
+  content: "Chaired Session at SIAM Mathematics of Materials 2024: Session on Data Sciences and Related Methods"
+  inline: true
+
+- date: 2024-04-10
+  content: "Co-organizing Minisymposium at WCCM 2024: Machine learning algorithms for accelerating material characterization, discovery, design, and manufacturing processes"
+  inline: true
+
+- date: 2024-05-20
+  content: "Will be giving an invited talk at IACM Workshop in Kitakyushu, Japan: Multimodal machine learning with small datasets for process-structure-property modeling"
+  inline: true

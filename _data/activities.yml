@@ -1,0 +1,34 @@
+- title: Session Chair
+  type: time_table
+  contents:
+    - title: Data Sciences and Related Methods
+      institution: Mathematics of Materials 2024, Society for Industrial and Applied Mathematics
+      location: Pittsburgh, PA, USA
+      year: 2024
+      month: May
+
+- title: Minisymposium Organizer
+  type: time_table
+  contents:
+    - title: Machine learning algorithms for accelerating material characterization, discovery, design, and manufacturing processes
+      institution: World Congress of Computational Mechanics
+      location: Vancouver, BC, Canada
+      year: 2024
+      month: July
+
+    - title: Accelerating analysis and design of complex materials via novel numerical methods and machine learning techniques
+      institution: Mathematics of Materials 2024, Society for Industrial and Applied Mathematics
+      location: Pittsburgh, PA, USA
+      year: 2024
+      month: May
+
+    - title: Machine learning's role in uncovering insights from heterogeneous materials data
+      institution: Mathematics of Materials 2024, Society for Industrial and Applied Mathematics
+      location: Pittsburgh, PA, USA
+      year: 2024
+      month: May
+
+    - title: Integrating machine learning and numerical methods to accelerate engineering design
+      institution: Mechanistic Machine Learning and Digital Engineering for Computational Science, Engineering and Technology
+      location: El Paso, TX, USA
+      year: 2023

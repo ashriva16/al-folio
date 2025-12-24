@@ -6,42 +6,55 @@
 
 :root {
   color-scheme: light;
-  --global-bg-color: #{$white-color};
-  --global-code-bg-color: #{$code-bg-color-light};
-  --global-text-color: #{$black-color};
-  --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$purple-color};
-  --global-hover-color: #{$purple-color};
+  /* === Surfaces === */
+  --global-bg-color: #{$white-50}; /* page background */
+  --global-bg-secondary-color: #{$white-400}; /* alternating sections */
+  --global-card-bg-color: #{$white-100}; /* lifted surfaces / cards */
+
+  /* === Text === */
+  --global-text-color: #{$black-900}; /* main body text */
+  --global-text-color-secondary: #{$black-600}; /* secondary / muted text */
+
+  /* === Accent / hover === */
+  --global-theme-color: #{$color-brand-primary-light};
+  --global-secondary-theme-color: #{$color-brand-secondary-light};
+  --global-hover-color: #{$color-brand-primary-light};
   --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-dark};
-  --global-footer-text-color: #{$grey-color-light};
-  --global-footer-link-color: #{$white-color};
-  --global-distill-app-color: #{$grey-color};
-  --global-divider-color: rgba(0, 0, 0, 0.1);
-  --global-card-bg-color: #{$white-color};
-  --global-highlight-color: #{$red-color-dark};
+
+  /* === Dividers, chrome, code === */
+  --global-divider-color: #{$neutral-50};
+  --global-code-bg-color: #{$color-brand-secondary-light}; /* inline & fenced code bg */
+  --global-link-color: #{$link-color};
+
+  /* === Shadows / overlays === */
+  --shadow-color: #{$black-color}; /* used by components that derive box-shadow */
+
+  /* === Footer === */
+  --global-footer-bg-color: #{$neutral-100};
+  --global-footer-text-color: #{$black-800};
+  --global-footer-link-color: #{$link-color};
+
+  /* === Newsletter / special sections (optional) === */
+  --global-newsletter-bg-color: #{$white-100};
+  --global-newsletter-text-color: #{$black-900};
+
+  /* === Back to top button === */
   --global-back-to-top-bg-color: rgba(
     #{color.channel($black-color, "red", $space: rgb)},
     #{color.channel($black-color, "green", $space: rgb)},
     #{color.channel($black-color, "blue", $space: rgb)},
-    0.4
+    0.15
   );
   --global-back-to-top-text-color: #{$white-color};
-  --global-newsletter-bg-color: #{$white-color};
-  --global-newsletter-text-color: #{$black-color};
 
-  --global-tip-block: #42b983;
-  --global-tip-block-bg: #e2f5ec;
-  --global-tip-block-text: #215d42;
-  --global-tip-block-title: #359469;
-  --global-warning-block: #e7c000;
-  --global-warning-block-bg: #fff8d8;
-  --global-warning-block-text: #6b5900;
-  --global-warning-block-title: #b29400;
-  --global-danger-block: #c00;
-  --global-danger-block-bg: #ffe0e0;
-  --global-danger-block-text: #600;
-  --global-danger-block-title: #c00;
+  /* === Navbar === */
+  --nav-bg-color: #{$white-50};
+  --nav-toggler-color: #{$black-800};
+  --nav-text-color: #{$black-900};
+  --nav-theme-color: #{$color-brand-primary-light}; /* active links */
+  --nav-border-color: #{$neutral-300};
+
+  /* === Utility classes visibility === */
 
   #light-toggle-system {
     padding-left: 10px;
@@ -78,41 +91,52 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --global-bg-color: #{$grey-color-dark};
-  --global-code-bg-color: #{$code-bg-color-dark};
-  --global-text-color: #{$grey-color-light};
-  --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$cyan-color};
-  --global-hover-color: #{$cyan-color};
+  --global-bg-color: #{$black-900}; /* page background (deep charcoal) */
+  --global-bg-secondary-color: #{$black-800}; /* section background or alternates */
+  --global-card-bg-color: #{$black-800}; /* lifted surfaces / cards */
+
+  /* === Text === */
+  --global-text-color: #{$black-100}; /* main body text */
+  --global-text-color-secondary: #{$black-300}; /* secondary / muted text */
+
+  /* === Accent / hover === */
+  --global-theme-color: #{$color-brand-primary-dark};
+  --global-secondary-theme-color: #{$color-brand-secondary-dark};
+  --global-hover-color: #{$color-brand-primary-dark};
   --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$grey-color-dark};
-  --global-footer-link-color: #{$black-color};
-  --global-distill-app-color: #{$grey-color-light};
-  --global-divider-color: #424246;
-  --global-card-bg-color: #{$grey-900};
+
+  /* design */
+  --shadow-color: #{$white-400};
+
+  /* === Dividers, chrome, code === */
+  --global-divider-color: color-mix(in srgb, #{$neutral-50}, transparent 88%);
+  --global-code-bg-color: #{$color-brand-secondary-dark};
+  --global-distill-app-color: #{$black-300};
+
+  /* === Footer === */
+  --global-footer-bg-color: #{$black-900};
+  --global-footer-text-color: #{$black-100};
+  --global-footer-link-color: #{$white-color};
+
+  /* === Newsletter or callouts === */
+  --global-newsletter-bg-color: #{$black-800};
+  --global-newsletter-text-color: #{$black-100};
+
+  /* === Back to top button === */
   --global-back-to-top-bg-color: rgba(
     #{color.channel($white-color, "red", $space: rgb)},
     #{color.channel($white-color, "green", $space: rgb)},
     #{color.channel($white-color, "blue", $space: rgb)},
-    0.5
+    0.15
   );
-  --global-back-to-top-text-color: #{$black-color};
-  --global-newsletter-bg-color: #{$grey-color-light};
-  --global-newsletter-text-color: #{$grey-color-dark};
+  --global-back-to-top-text-color: #{$white-color};
 
-  --global-tip-block: #42b983;
-  --global-tip-block-bg: #215d42;
-  --global-tip-block-text: #beffe2;
-  --global-tip-block-title: #e2f5ec;
-  --global-warning-block: #e7c000;
-  --global-warning-block-bg: #6b5900;
-  --global-warning-block-text: #fff2af;
-  --global-warning-block-title: #fff8d8;
-  --global-danger-block: #c00;
-  --global-danger-block-bg: #600;
-  --global-danger-block-text: #ffb9b9;
-  --global-danger-block-title: #ffe0e0;
+  /* === Navbar === */
+  --nav-bg-color: #{$black-900};
+  --nav-toggler-color: #{$black-100};
+  --nav-text-color: #{$black-100};
+  --nav-hover-color: #{$color-brand-primary-dark};
+  --nav-theme-color: #{$color-brand-primary-dark}; /* active links */
 
   .only-light {
     display: none;

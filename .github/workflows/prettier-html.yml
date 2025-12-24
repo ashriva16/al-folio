@@ -10,7 +10,9 @@ jobs:
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
+          repository: ashriva16/ashriva16.github.io
           ref: gh-pages
+          token: ${{ secrets.PAGES_REPO_TOKEN }}
 
       - name: Find and Remove </source> Tags
         run: find . -type f -name "*.html" -exec sed -i 's/<\/source>//g' {} +

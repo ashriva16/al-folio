@@ -1,0 +1,75 @@
+{% assign tag_classes = '' %}
+{% for tag in project.tags %}
+  {% assign slugified_tag = tag | slugify %}
+  {% assign tag_classes = tag_classes | append: ' tag-' | append: slugified_tag %}
+{% endfor %}
+<div class="col project-item category-{{ project.category | slugify }} {{ tag_classes | strip }}">
+  <div class="card h-100 hoverable">
+    <p class="card-header">
+      {{ project.title }}
+    </p>
+    {% if project.img %}
+      {%
+        include figure.liquid
+        loading="lazy"
+        path=project.img
+        zoomable=true
+        sizes="(min-width: 992px) 31vw, (min-width: 768px) 45vw, 92vw"
+        alt="project thumbnail"
+        class="card-img-top"
+      %}
+    {% endif %}
+    {% if project.video %}
+      {%
+        include video.liquid
+        path=project.video
+        class="card-img-top"
+        autoplay=false
+        controls=true
+        loop=true
+        muted=true
+      %}
+    {% endif %}
+    <div class="card-body">
+      {% comment %} <h5 class="card-title">{{ project.title }}</h5> {% endcomment %}
+      <p class="card-text">{{ project.description }}</p>
+      <div class="row ml-1 mr-1 p-0">
+        {% if project.github %}
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="{{ project.github }}"><i class="fa-brands fa-github gh-icon"></i></a>
+            </div>
+            {% if project.github_stars %}
+              <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+                <i class="fa-solid fa-star"></i>
+                <span id="{{ project.github_stars }}-stars"></span>
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      {% if project.tags and project.tags.size > 0 %}
+        <p class="mb-2">
+          {% for tag in project.tags %}
+            <span class="badge badge-neutral rounded-pill me-1">#{{ tag }}</span>
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <a
+        href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}"
+        class="badge bg-primary text-white px-3 py-2"
+      >
+        Read more
+      </a>
+
+      {% if project.date %}
+        <span class="text-muted small">
+          <i class="fa-regular fa-calendar"></i>
+          {{ project.date | date: '%b %Y' }}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+</div>

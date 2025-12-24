@@ -1,0 +1,55 @@
+tools:
+  - category: Skillset
+    items:
+      - name: PyTorch
+        level: 3
+      - name: TensorFlow
+        level: 3
+      - name: BoTorch
+        level: 4
+      - name: R
+        level: 3
+      - name: Python
+        level: 4
+      - name: C
+        level: 3
+      - name: C++
+        level: 3
+      - name: CUDA
+        level: 2
+      - name: OpenMP
+        level: 2
+      - name: MPI
+        level: 2
+      - name: FEniCS
+        level: 3
+      - name: LAMMPS
+        level: 2
+
+Expertise:
+  - category: Interests and Expertise
+    items:
+      - name: Optimization Methods
+        level: 2
+      - name: Scientific computing / simulations
+        level: 3
+      - name: High-Performance Computing
+        level: 2
+      - name: Scientific Machine Learning
+        level: 4
+      - name: Active Learning
+        level: 4
+      - name: Multimodal Learning
+        level: 3
+      - name: Generative AI
+        level: 3
+      - name: Cloud computing
+        level: 2
+      - name: Large Language Models
+        level: 2
+      - name: Representation Learning
+        level: 3
+      - name: Explainable ML
+        level: 2
+      - name: Image & Signal Processing
+        level: 3

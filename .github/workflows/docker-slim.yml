@@ -4,20 +4,23 @@ name: Docker Slim
 on:
   push:
     branches:
-      - master
-      - main
+      - myweb
     paths:
       - ".github/workflows/docker-slim.yml"
   workflow_run:
     workflows: ["Docker Image CI"]
     types:
       - completed
-  workflow_dispatch:
+
+# on:
+#   push:
+#     branches:
+#       - 'master'
 
 jobs:
   build:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.repository_owner == 'alshedivat' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.repository_owner == 'ashriva16' }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -39,15 +42,15 @@ jobs:
           sed -i "s|\.:|${{ github.workspace }}:|g" ${{ github.workspace }}/docker-compose.yml
           cat ${{ github.workspace }}/docker-compose.yml
 
-      - uses: kitabisa/docker-slim-action@v1.2.0
+      - uses: kitabisa/docker-slim-action@v1.1.1
         env:
           DSLIM_PULL: true
           DSLIM_COMPOSE_FILE: ${{ github.workspace }}/docker-compose.yml
           DSLIM_TARGET_COMPOSE_SVC: jekyll
           DSLIM_CONTINUE_AFTER: signal
         with:
-          target: amirpourmand/al-folio
+          target: ashriva16/mywebsite
           tag: "slim"
 
       # Push to the registry
-      - run: docker image push amirpourmand/al-folio:slim
+      - run: docker image push ashriva16/mywebsite:slim

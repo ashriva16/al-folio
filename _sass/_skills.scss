@@ -1,0 +1,58 @@
+section {
+  margin-bottom: 3rem;
+}
+
+.tools-section h2,
+.models-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.models-section {
+  margin-top: 4rem; // <<< This creates the spacing you asked for!
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-list,
+.sub-skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.skill-item {
+  margin-bottom: 1em;
+}
+
+.skill-name {
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.progress-bar-container {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  text-align: right;
+  padding-right: 6px;
+  line-height: 20px;
+  color: #fff;
+  font-size: 0.8em;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.sub-title {
+  margin-top: 1rem;
+  font-weight: 600;
+}
